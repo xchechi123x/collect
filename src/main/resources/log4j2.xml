@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="30">
+    <Properties>
+
+        <Property name="DEBUG_LOG_PATTERN" value="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta}
+            %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{:}{faint} %m%n%xwEx"/>
+        <Property name="COLLECT_LOG_PATTERN" value="%m%n"/>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${DEBUG_LOG_PATTERN}"/>
+            <Filters>
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </Console>
+
+        <RollingFile name="collectLogger" fileName="logs/collection/collect.txt"
+                     filePattern="logs/collection/collect-%d{yyyy-MM-dd}.txt">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="all">
+            <AppenderRef ref="console"/>
+        </Root>
+
+        <AsyncLogger name="collectLogger" level="INFO" includeLocation="true">
+            <AppenderRef ref="collectLogger"/>
+        </AsyncLogger>
+
+    </Loggers>
+</Configuration>
