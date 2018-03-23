@@ -26,3 +26,4 @@ nbdist/
 /logs/
 /data/test/logs/
 /data/test/report/
+/.mvn/
