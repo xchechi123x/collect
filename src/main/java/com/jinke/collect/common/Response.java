@@ -8,8 +8,9 @@ import java.util.Map;
 @Data
 public class Response {
 
-    private Integer code = 0;
-    private String message = "";
+    private Integer code = ResponseConstant.SUCCESS_CODE;
+    private String message = ResponseConstant.EMPUTY_MESSAGE;
+
     private Map data = new HashMap<String, Object>();
 
     public Response setCode(Integer code) {
